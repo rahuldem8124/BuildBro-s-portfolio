@@ -1,83 +1,63 @@
 "use client";
-import { useState } from "react";
+import { Lock, User, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
-import { Lock, Mail, ArrowRight } from "lucide-react";
-// 1. Import the router for navigation
-import { useRouter } from "next/navigation";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  // 2. Initialize the router
-  const router = useRouter();
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Simulate a login delay for a premium feel
-    console.log("Login attempt:", { email, password });
-    
-    // 3. Redirect to the dashboard
-    router.push("/dashboard");
-  };
-
   return (
-    <div className="flex min-h-[600px] items-center justify-center bg-[#020617] p-6">
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className="w-full max-w-md rounded-2xl border border-slate-800 bg-slate-900/50 p-8 shadow-2xl backdrop-blur-xl"
-      >
-        <div className="mb-8 text-center">
-          <h2 className="text-3xl font-bold text-white">Welcome Back</h2>
-          <p className="mt-2 text-slate-400">Access your client dashboard</p>
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="bg-[#e8e2d5] p-8 border-2 border-[#1a120b] shadow-[10px_10px_0px_#1a120b] relative"
+      style={{ backgroundImage: "url('https://www.transparenttextures.com/patterns/paper-fibers.png')" }}
+    >
+      {/* Decorative Corner Rivets */}
+      <div className="absolute top-3 left-3 w-2 h-2 bg-[#1a120b] rounded-full opacity-30" />
+      <div className="absolute top-3 right-3 w-2 h-2 bg-[#1a120b] rounded-full opacity-30" />
+      <div className="absolute bottom-3 left-3 w-2 h-2 bg-[#1a120b] rounded-full opacity-30" />
+      <div className="absolute bottom-3 right-3 w-2 h-2 bg-[#1a120b] rounded-full opacity-30" />
+
+      <form className="space-y-6">
+        
+        {/* Username Field */}
+        <div className="space-y-2">
+          <label className="text-xs font-bold uppercase tracking-widest text-[#1a120b]/70">
+            Badge Number / Email
+          </label>
+          <div className="relative">
+            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#b85c38]" />
+            <input 
+              type="email" 
+              placeholder="sheriff@outlaw.code"
+              className="w-full bg-[#f5f5f5] border-b-2 border-[#1a120b]/20 px-10 py-3 text-[#1a120b] font-serif placeholder:text-[#1a120b]/30 focus:outline-none focus:border-[#b85c38] transition-colors"
+            />
+          </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">Email Address</label>
-            <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 w-5 h-5" />
-              <input 
-                type="email" 
-                required
-                className="w-full rounded-lg border border-slate-700 bg-slate-800 py-3 pl-11 pr-4 text-white placeholder-slate-500 outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
-                placeholder="name@company.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
+        {/* Password Field */}
+        <div className="space-y-2">
+          <label className="text-xs font-bold uppercase tracking-widest text-[#1a120b]/70">
+            Security Key
+          </label>
+          <div className="relative">
+            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#b85c38]" />
+            <input 
+              type="password" 
+              placeholder="••••••••"
+              className="w-full bg-[#f5f5f5] border-b-2 border-[#1a120b]/20 px-10 py-3 text-[#1a120b] font-serif placeholder:text-[#1a120b]/30 focus:outline-none focus:border-[#b85c38] transition-colors"
+            />
           </div>
-
-          <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">Password</label>
-            <div className="relative">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 w-5 h-5" />
-              <input 
-                type="password" 
-                required
-                className="w-full rounded-lg border border-slate-700 bg-slate-800 py-3 pl-11 pr-4 text-white placeholder-slate-500 outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-          </div>
-
-          <button 
-            type="submit"
-            className="group relative flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 py-3 font-semibold text-white hover:bg-blue-700 transition-all active:scale-[0.98]"
-          >
-            Sign In
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </button>
-        </form>
-
-        <div className="mt-6 text-center text-sm">
-          <a href="#" className="text-blue-400 hover:text-blue-300 transition-colors">Forgot password?</a>
         </div>
-      </motion.div>
-    </div>
+
+        {/* Submit Button */}
+        <button 
+          type="button" // Change to "submit" when logic is ready
+          className="w-full bg-[#1a120b] text-[#e5d3b3] py-4 font-black uppercase tracking-widest hover:bg-[#b85c38] transition-colors flex items-center justify-center gap-2 group mt-4"
+        >
+          Open Ledger
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </button>
+
+      </form>
+    </motion.div>
   );
 }

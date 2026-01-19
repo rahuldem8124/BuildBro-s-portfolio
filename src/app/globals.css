@@ -1,19 +1,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@layer utilities {
-  .perspective-1000 {
-    perspective: 1000px;
-  }
-  .preserve-3d {
-    transform-style: preserve-3d;
-  }
-}
+
 :root {
-  color-scheme: dark;
+  --background: #e5d3b3; 
+  --foreground: #2b1d15;
+  --accent: #b85c38;
+}
+
+/* 🔫 UNIVERSAL REVOLVER CURSOR */
+/* The '*' selector targets EVERY element on the page. */
+/* '!important' forces it to override text inputs and pointer links. */
+html, body, * {
+  cursor: url('/revolver.png') 16 16, auto !important;
 }
 
 body {
-  background-color: #020617;
-  color: white;
+  background-color: var(--background);
+  /* Grainier, darker paper texture */
+  background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+  color: var(--foreground);
+  font-family: 'Courier New', Courier, monospace;
 }
+
+/* Enhanced Flickering Projector */
+@keyframes flicker {
+  0% { opacity: 0.25; filter: contrast(100%) sepia(50%); }
+  5% { opacity: 0.35; filter: contrast(110%) sepia(60%); }
+  100% { opacity: 0.25; }
+}
+
+.old-film-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  background: 
+    radial-gradient(circle, transparent 20%, rgba(43, 29, 21, 0.5) 100%),
+    url('https://www.transparenttextures.com/patterns/stardust.png');
+  mix-blend-mode: multiply;
+  animation: flicker 0.1s infinite;
+}
+
+/* Custom Scrollbar to look like Wood/Rust */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #1a120b; }
+::-webkit-scrollbar-thumb { background: #b85c38; border-radius: 0px; }
